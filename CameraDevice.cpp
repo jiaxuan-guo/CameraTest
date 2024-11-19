@@ -10,7 +10,7 @@ int CameraDevice::init(char *dev_name) {
 }
 
 int CameraDevice::openDevice() {
-    struct v4l2_capability cap = {0};
+    struct v4l2_capability cap;
     if (ioctl(m_fd, VIDIOC_QUERYCAP, &cap) < 0) {
         std::cout << "Failed to query capability:" << strerror(errno) << std::endl;
         return -1;
@@ -28,7 +28,7 @@ int CameraDevice::openDevice() {
 }
 
 int CameraDevice::setFormat() {
-    struct v4l2_format format = {0};
+    struct v4l2_format format;
     format.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     format.fmt.pix.width = 1920;
     format.fmt.pix.height = 1080;
@@ -58,8 +58,6 @@ int CameraDevice::setFormat() {
 }
 
 int CameraDevice::requestBuffers() {
-    unsigned int i;
-    struct v4l2_buffer buffer;
     struct v4l2_requestbuffers reqbuf;
 
     memset(&reqbuf, 0, sizeof(reqbuf));

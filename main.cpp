@@ -8,7 +8,6 @@ int main(int argc, char *argv[]) {
     int count = 1;
     char filename[16];
 
-
     if (argc != 2) {
         std::cout << "<Usage> " << argv[0] << " <camera>" << std::endl;
     }
